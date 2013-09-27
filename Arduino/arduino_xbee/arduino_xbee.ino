@@ -247,9 +247,9 @@ void loop(void)
       
       if (xbee.getResponse().isAvailable()) {
         
-         if (xbee.getResponse().getApiId() == ZB_RX_RESPONSE) {
+         
       
-             xbee.getResponse().getZBRxResponse(zbRX);
+      
           
         //tone(pizeoPin, 400, 200);
         lcd.clear();
@@ -268,7 +268,10 @@ void loop(void)
 //        digitalWrite(ledPin, LOW);
         
         
-  
+      
+        switch (xbee.getResponse().getApiId()) {             //what kind of packet was received
+            case ZB_RX_RESPONSE:                             //rx data packet
+                xbee.getResponse().getZBRxResponse(zbRX);    //get the received data
                 
                 
                 
@@ -348,8 +351,8 @@ void loop(void)
                         digitalWrite(redLEDPin, HIGH);
                       } else if (bookedState == 0){
                         
-                        digitalWrite(greenLEDPin, HIGH);
-                        digitalWrite(blueLEDPin, LOW);
+                        digitalWrite(greenLEDPin, LOW);
+                        digitalWrite(blueLEDPin, HIGH);
                         
                         digitalWrite(redLEDPin, LOW);
                       } else {
@@ -368,6 +371,7 @@ void loop(void)
 
         
          
+        break;
       }
       
     }
