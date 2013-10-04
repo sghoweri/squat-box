@@ -154,7 +154,7 @@ var serialport = new SerialPort("/dev/tty.usbserial-AM01ON5J", {
       }, 5000);
   }
 
-  getConferenceStatus();
+  //getConferenceStatus();
 
 
 		io.sockets.on('connection', function (socket) {
@@ -316,7 +316,7 @@ var packageData = function(myData){
 
 
   var defaultString = {
-    "name":"myData",
+    "name":myData,
     "booked":true
   }
 
@@ -439,154 +439,155 @@ xbeeAPI.on("frame_object", function(frame) {
   }
 
 
- if (frame.data !== undefined){
+  if (frame.data !== undefined){
+    console.log(frame);
+
+
+ 	// var length = (frame.data).length;
+
+  // var string = '';
+
+	 //  for (i=0; i < length; i++){
+	 //    string += (String.fromCharCode(frame.data[i]));
+	 //  }
+
+	 //  string = string.replace(/<</g,"{");
+	 //  string = string.replace(/>>/g,"}");
+
+
+	 //  var obj = JSON.parse(string);
+
+  }
+ });
+
+// 	  var room = obj["Room Name"];
+
+// 	  var status = obj["Booked"];
 
 
 
-	var length = (frame.data).length;
+// 	  request({
+//         uri: "http://officeapi.lespeabody.net/rooms/" + room + "/",
+//         method: "PUT",
+//         timeout: 10000,
+//         followRedirect: true,
+//         maxRedirects: 10,
+//         form: {
+//         	"utf8": "✓",
+//         	"_method": "patch",
+//         	"authenticity_token": "0mMI7mhgT2rueSlK82VFqYicXHrGZlAOL+pnekMDkpI=",
+//         	"room[booked]": status
+//         }
+//       }, function(error, response, body) {
 
-	  var string = '';
-
-	  for (i=0; i < length; i++){
-	    string += (String.fromCharCode(frame.data[i]));
-	  }
-
-	  string = string.replace(/<</g,"{");
-	  string = string.replace(/>>/g,"}");
-
-
-	  var obj = JSON.parse(string);
-
-
-
-	  var room = obj["Room Name"];
-
-	  var status = obj["Booked"];
+//       		console.log(body);
 
 
-
-	  request({
-        uri: "http://officeapi.lespeabody.net/rooms/" + room + "/",
-        method: "PUT",
-        timeout: 10000,
-        followRedirect: true,
-        maxRedirects: 10,
-        form: {
-        	"utf8": "✓",
-        	"_method": "patch",
-        	"authenticity_token": "0mMI7mhgT2rueSlK82VFqYicXHrGZlAOL+pnekMDkpI=",
-        	"room[booked]": status
-        }
-      }, function(error, response, body) {
-
-      		console.log(body);
+//           // var obj = JSON.parse(body);
 
 
-          // var obj = JSON.parse(body);
+//           // var defaultString = {
+//           //   "name":"Room Status",
+//           //   "booked": obj.booked
+//           // }
 
+//           // var package = JSON.stringify(defaultString);
 
-          // var defaultString = {
-          //   "name":"Room Status",
-          //   "booked": obj.booked
-          // }
-
-          // var package = JSON.stringify(defaultString);
-
-          // var length = package.length;
+//           // var length = package.length;
 
 
 
-          // for (i=0; i < length; i++){
-          //   string += package[i];
-          // }
+//           // for (i=0; i < length; i++){
+//           //   string += package[i];
+//           // }
 
-          // string = string.replace(/{/g,"<<");
-          // string = string.replace(/}/g,">>");
-
-
-
-
-          // frame_obj0.data = package;
-
-
-
-          // serialport.write(xbeeAPI.buildFrame(frame_obj0));
-
-
-
-      });
-
-
-
- }
-
- //  if ((util.inspect(frame.data))){
-	//   //if ((util.inspect(frame.data[0])) == 49){
-	//   var data = (util.inspect(frame.data));
-	//   //console.log(data.length);
-
-	//   // for (var i=0; i<data.length; i++){
-	//   //   if (data[i] === '['){
-	//   //     write = true;
-	//   //   } else if (data[i] === ']'){
-	//   //     write = false;
-	//   //   }
-
-	//   //   if (write === true){
-	//   //     console.log(data[i]);
-	//   //   }
-	//   // }
-	//   //console.log(data[1]);
-	// //}
- //  }
-
-});
-
-
-
-var triggerFunction = function(serialport){
+//           // string = string.replace(/{/g,"<<");
+//           // string = string.replace(/}/g,">>");
 
 
 
 
-
-	var fireThis = function(serialport){
-
-
-
-		// var url = '10.10.14.136:3000/api/v1/rooms/folsom';
-
-		// $.ajax({
-		//    type: 'GET',
-		//     url: url,
-		//     async: false,
-		//     jsonpCallback: 'jsonCallback',
-		//     contentType: "application/json",
-		//     dataType: 'jsonp',
-		//     success: function(json) {
-		//        //console.dir(json.sites);
-		//        console.log(json);
-		//     },
-		//     error: function(e) {
-		//        console.log(e.message);
-		//     }
-		// });
-
-
-		// var req = http.get('10.10.14.136:3000/api/v1/rooms/folsom', function(res) {
-		//   console.log("Got response: " + res.statusCode);
-		// }).on('error', function(e) {
-		//   console.log("Got error: " + e.message);
-		// });
-
-
-		// // write data to request body
-		// req.write('data\n');
-		// req.write('data\n');
-		// req.end();
+//           // frame_obj0.data = package;
 
 
 
-	};
-};
+//           // serialport.write(xbeeAPI.buildFrame(frame_obj0));
+
+
+
+//       });
+
+
+
+//  }
+
+//  //  if ((util.inspect(frame.data))){
+// 	//   //if ((util.inspect(frame.data[0])) == 49){
+// 	//   var data = (util.inspect(frame.data));
+// 	//   //console.log(data.length);
+
+// 	//   // for (var i=0; i<data.length; i++){
+// 	//   //   if (data[i] === '['){
+// 	//   //     write = true;
+// 	//   //   } else if (data[i] === ']'){
+// 	//   //     write = false;
+// 	//   //   }
+
+// 	//   //   if (write === true){
+// 	//   //     console.log(data[i]);
+// 	//   //   }
+// 	//   // }
+// 	//   //console.log(data[1]);
+// 	// //}
+//  //  }
+
+// });
+
+
+
+// var triggerFunction = function(serialport){
+
+
+
+
+
+// 	var fireThis = function(serialport){
+
+
+
+// 		// var url = '10.10.14.136:3000/api/v1/rooms/folsom';
+
+// 		// $.ajax({
+// 		//    type: 'GET',
+// 		//     url: url,
+// 		//     async: false,
+// 		//     jsonpCallback: 'jsonCallback',
+// 		//     contentType: "application/json",
+// 		//     dataType: 'jsonp',
+// 		//     success: function(json) {
+// 		//        //console.dir(json.sites);
+// 		//        console.log(json);
+// 		//     },
+// 		//     error: function(e) {
+// 		//        console.log(e.message);
+// 		//     }
+// 		// });
+
+
+// 		// var req = http.get('10.10.14.136:3000/api/v1/rooms/folsom', function(res) {
+// 		//   console.log("Got response: " + res.statusCode);
+// 		// }).on('error', function(e) {
+// 		//   console.log("Got error: " + e.message);
+// 		// });
+
+
+// 		// // write data to request body
+// 		// req.write('data\n');
+// 		// req.write('data\n');
+// 		// req.end();
+
+
+
+// 	};
+// };
 
