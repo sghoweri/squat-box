@@ -201,7 +201,7 @@ var connectArd = function(){
                         string = string.replace(/}/g,">>");
 
 
-                        frame_obj0.data = package;
+                        frame_obj0.data = string;
 
 
                         serialport.write(xbeeAPI.buildFrame(frame_obj0));
@@ -300,13 +300,10 @@ var packageData = function(myData){
     string += package[i];
   }
 
-  string = string.replace(/{/g,"<<");
-  string = string.replace(/}/g,">>");
+  string = string.replace(/{/g,"<<").replace(/}/g,">>");
 
 
-
-
-  frame_obj0.data = package;
+  frame_obj0.data = string;
 
 }
 
@@ -345,10 +342,9 @@ xbeeAPI.on("frame_object", function(frame) {
     if (frame.data !== undefined){
 
 
-        console.log(frame);
+        //console.log(frame);
 
 
-        /**
         //This commented out logic handles the string to JSON conversion that needs to occur when receiving data packets from the Arduino / XBee. The left and right curly brackets that would typically be in the serialized JSON string have to be temporarily converted to double less than / greater than characters in order to get around the right curly bracket being a reserved delimiter character in the XBee API Mode 2 specification. This conversion needs to happen on both sides - when the JSON data is getting created and prepped to send and when it is getting interpreted on either end (on the Arduino and the Node Server)
 
         var length = (frame.data).length;
@@ -366,7 +362,7 @@ xbeeAPI.on("frame_object", function(frame) {
         var obj = JSON.parse(string);
 
 
-        **/
+        console.log(obj);
 
 
     }
