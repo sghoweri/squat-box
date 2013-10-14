@@ -294,14 +294,18 @@ var packageData = function(myData){
 
   var length = package.length;
 
+  var string = '';
 
 
   for (i=0; i < length; i++){
     string += package[i];
   }
 
-  string = string.replace(/{/g,"<<").replace(/}/g,">>");
+  string = string.replace(/{/g,"<<");
+  string = string.replace(/}/g,">>");
 
+
+  console.log(string);
 
   frame_obj0.data = string;
 
